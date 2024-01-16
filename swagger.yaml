@@ -1,12 +1,12 @@
 ---
-swagger: '2.0'
+swagger: "2.0"
 info:
-  version: 1.0.0
-  title: Car Workshop API
-host: familygeeks.com
-basePath: /
+  version: "1.0.0"
+  title: "Car Workshop API"
+host: "familygeeks.com"
+basePath: "2.0"
 schemes:
-  - https
+  - "https"
 paths:
   /servicesCategories/all:
     get:
