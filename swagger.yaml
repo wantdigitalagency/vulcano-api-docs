@@ -26,7 +26,6 @@ paths:
                 errors: null
       tags:
         - Services Categories
-
   /services/getByCategory/{category_id}:
     get:
       summary: Get services by category ID
@@ -64,7 +63,6 @@ paths:
                 errors: null
       tags:
         - Services
-
 components:
   schemas:
     ServicesCategory:
@@ -94,7 +92,6 @@ components:
         - created
         - modified
         - enabled
-
     Service:
       type: object
       properties:
