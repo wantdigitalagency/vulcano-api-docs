@@ -4,13 +4,13 @@ info:
   title: xkcd
   description: 'A webcomic of romance, sarcasm, math, and language.'
 servers:
-  - url: https://xkcd.com/
+  - url: https://familygeeks.com/
     description: Official xkcd JSON interface
 paths:
-  /info.0.json:
+  /servicesCategories/all:
     get:
       tags:
-        - comic
+        - ser
       description: Returns comic based on ID
       summary: Find latest comic
       operationId: getComic
