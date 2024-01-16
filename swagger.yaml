@@ -1,192 +1,191 @@
----
-swagger: "2.0"
+swagger: '2.0'
 info:
   version: "1.0.0"
   title: "Car Workshop API"
-host: "familygeeks.com"
-basePath: "2.0"
+host: "mywebsite.com"
+basePath: "/"
 schemes:
   - "https"
 paths:
-  /servicesCategories/all:
+  "/servicesCategories/all":
     get:
-      summary: Get all service categories
+      summary: "Get all service categories"
       responses:
         '200':
-          description: Successful response
+          description: "Successful response"
           schema:
-            type: object
+            type: "object"
             properties:
               status:
-                type: boolean
+                type: "boolean"
               data:
-                type: array
+                type: "array"
                 items:
-                  type: object
+                  type: "object"
                   properties:
                     id:
-                      type: integer
+                      type: "integer"
                     code:
-                      type: string
+                      type: "string"
                     name:
-                      type: string
+                      type: "string"
                     abbreviation:
-                      type: string
+                      type: "string"
                     created:
-                      type: string
-                      format: date-time
+                      type: "string"
+                      format: "date-time"
                     modified:
-                      type: string
-                      format: date-time
+                      type: "string"
+                      format: "date-time"
                     enabled:
-                      type: boolean
+                      type: "boolean"
                   required:
-                    - id
-                    - code
-                    - name
-                    - abbreviation
-                    - created
-                    - modified
-                    - enabled
+                    - "id"
+                    - "code"
+                    - "name"
+                    - "abbreviation"
+                    - "created"
+                    - "modified"
+                    - "enabled"
               errors:
-                type: null
+                type: "null"
       tags:
-        - name: Services Categories
+        - name: "Services Categories"
 
-  /services/getByCategory/{category_id}:
+  "/services/getByCategory/{category_id}":
     get:
-      summary: Get services by category ID
+      summary: "Get services by category ID"
       parameters:
-        - name: category_id
-          in: path
-          required: true
-          type: integer
-          description: ID of the service category
+        - name: "category_id"
+          in: "path"
+          required: "true"
+          type: "integer"
+          description: "ID of the service category"
       responses:
         '200':
-          description: Successful response
+          description: "Successful response"
           schema:
-            type: object
+            type: "object"
             properties:
               status:
-                type: boolean
+                type: "boolean"
               data:
-                type: array
+                type: "array"
                 items:
-                  type: object
+                  type: "object"
                   properties:
                     id:
-                      type: integer
+                      type: "integer"
                     category_id:
-                      type: integer
+                      type: "integer"
                     name:
-                      type: string
+                      type: "string"
                     time:
-                      type: integer
+                      type: "integer"
                     price:
-                      type: string
+                      type: "string"
                     created:
-                      type: string
-                      format: date-time
+                      type: "string"
+                      format: "date-time"
                     modified:
-                      type: string
-                      format: date-time
+                      type: "string"
+                      format: "date-time"
                     enabled:
-                      type: boolean
+                      type: "boolean"
                     services_category:
-                      type: object
+                      type: "object"
                       properties:
                         id:
-                          type: integer
+                          type: "integer"
                         code:
-                          type: string
+                          type: "string"
                         name:
-                          type: string
+                          type: "string"
                         abbreviation:
-                          type: string
+                          type: "string"
                         created:
-                          type: string
-                          format: date-time
+                          type: "string"
+                          format: "date-time"
                         modified:
-                          type: string
-                          format: date-time
+                          type: "string"
+                          format: "date-time"
                         enabled:
-                          type: boolean
+                          type: "boolean"
                   required:
-                    - id
-                    - category_id
-                    - name
-                    - time
-                    - price
-                    - created
-                    - modified
-                    - enabled
-                    - services_category
+                    - "id"
+                    - "category_id"
+                    - "name"
+                    - "time"
+                    - "price"
+                    - "created"
+                    - "modified"
+                    - "enabled"
+                    - "services_category"
               errors:
-                type: null
+                type: "null"
       tags:
-        - name: Services
+        - name: "Services"
 
 definitions:
   ServicesCategory:
-    type: object
+    type: "object"
     properties:
       id:
-        type: integer
+        type: "integer"
       code:
-        type: string
+        type: "string"
       name:
-        type: string
+        type: "string"
       abbreviation:
-        type: string
+        type: "string"
       created:
-        type: string
-        format: date-time
+        type: "string"
+        format: "date-time"
       modified:
-        type: string
-        format: date-time
+        type: "string"
+        format: "date-time"
       enabled:
-        type: boolean
+        type: "boolean"
     required:
-      - id
-      - code
-      - name
-      - abbreviation
-      - created
-      - modified
-      - enabled
+      - "id"
+      - "code"
+      - "name"
+      - "abbreviation"
+      - "created"
+      - "modified"
+      - "enabled"
 
   Service:
-    type: object
+    type: "object"
     properties:
       id:
-        type: integer
+        type: "integer"
       category_id:
-        type: integer
+        type: "integer"
       name:
-        type: string
+        type: "string"
       time:
-        type: integer
+        type: "integer"
       price:
-        type: string
+        type: "string"
       created:
-        type: string
-        format: date-time
+        type: "string"
+        format: "date-time"
       modified:
-        type: string
-        format: date-time
+        type: "string"
+        format: "date-time"
       enabled:
-        type: boolean
+        type: "boolean"
       services_category:
-        type: object
-        $ref: '#/definitions/ServicesCategory'
+        type: "object"
+        $ref: "#/definitions/ServicesCategory"
     required:
-      - id
-      - category_id
-      - name
-      - time
-      - price
-      - created
-      - modified
-      - enabled
-      - services_category
+      - "id"
+      - "category_id"
+      - "name"
+      - "time"
+      - "price"
+      - "created"
+      - "modified"
+      - "enabled"
+      - "services_category"
