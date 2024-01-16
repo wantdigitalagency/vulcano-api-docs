@@ -7,10 +7,10 @@ servers:
 paths:
   /servicesCategories/all:
     get:
-      summary: Get all service categories
+      summary: "Get all service categories"
       responses:
         '200':
-          description: Successful response
+          description: "Successful response"
           content:
             application/json:
               example:
@@ -18,15 +18,13 @@ paths:
                 data:
                   - id: 1
                     code: "ENG"
-                    name: Engine Services
+                    name: "Engine Services"
                     abbreviation: "Eng. Serv."
                     created: "2024-01-16T12:00:00Z"
                     modified: "2024-01-16T14:30:00Z"
                     enabled: true
                 errors: null
-      tags:
-        - Services Categories
-
+      
   /services/getByCategory/{category_id}:
     get:
       summary: Get services by category ID
@@ -47,7 +45,7 @@ paths:
                 data:
                   - id: 1
                     category_id: 1
-                    name: Oil Change
+                    name: "Oil Change"
                     time: 30
                     price: "50.00"
                     created: "2024-01-16T12:00:00Z"
@@ -56,14 +54,12 @@ paths:
                     services_category:
                       id: 1
                       code: "ENG"
-                      name: Engine Services
+                      name: "Engine Services"
                       abbreviation: "Eng. Serv."
                       created: "2024-01-16T12:00:00Z"
                       modified: "2024-01-16T14:30:00Z"
                       enabled: true
                 errors: null
-      tags:
-        - Services
 
 components:
   schemas:
