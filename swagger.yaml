@@ -1,126 +1,71 @@
 openapi: 3.0.0
 info:
-  title: Car Workshop API
   version: 1.0.0
+  title: xkcd
+  description: 'A webcomic of romance, sarcasm, math, and language.'
 servers:
-  - url: https://familygeeks.com
+  - url: https://xkcd.com/
+    description: Official xkcd JSON interface
 paths:
-  /servicesCategories/all:
+  /info.0.json:
     get:
-      summary: "Get all service categories"
+      tags:
+        - comic
+      description: Returns comic based on ID
+      summary: Find latest comic
+      operationId: getComic
       responses:
         '200':
-          description: "Successful response"
+          description: Successfully returned a comic
           content:
             application/json:
-              example:
-                status: true
-                data:
-                  - id: 1
-                    code: "ENG"
-                    name: "Engine Services"
-                    abbreviation: "Eng. Serv."
-                    created: "2024-01-16T12:00:00Z"
-                    modified: "2024-01-16T14:30:00Z"
-                    enabled: true
-                errors: null
-      
-  /services/getByCategory/{category_id}:
+              schema:
+                $ref: '#/components/schemas/Comic'
+  /{id}/info.0.json:
     get:
-      summary: Get services by category ID
+      tags:
+        - comic
+      description: Returns comic based on ID
+      summary: Find comic by ID
+      operationId: getComicById
       parameters:
-        - in: path
-          name: category_id
+        - name: id
+          in: path
           required: true
           schema:
             type: integer
-          description: ID of the service category
       responses:
         '200':
-          description: Successful response
+          description: Successfully returned a comic
           content:
             application/json:
-              example:
-                status: true
-                data:
-                  - id: 1
-                    category_id: 1
-                    name: "Oil Change"
-                    time: 30
-                    price: "50.00"
-                    created: "2024-01-16T12:00:00Z"
-                    modified: "2024-01-16T14:30:00Z"
-                    enabled: true
-                    services_category:
-                      id: 1
-                      code: "ENG"
-                      name: "Engine Services"
-                      abbreviation: "Eng. Serv."
-                      created: "2024-01-16T12:00:00Z"
-                      modified: "2024-01-16T14:30:00Z"
-                      enabled: true
-                errors: null
+              schema:
+                $ref: '#/components/schemas/Comic'
 
 components:
   schemas:
-    ServicesCategory:
+    Comic:
       type: object
       properties:
-        id:
+        month:
+          type: string
+        num:
           type: integer
-        code:
+        link:
           type: string
-        name:
+        year:
           type: string
-        abbreviation:
+        news:
           type: string
-        created:
+        safe_title:
           type: string
-          format: date-time
-        modified:
+        transcript:
           type: string
-          format: date-time
-        enabled:
-          type: boolean
-      required:
-        - id
-        - code
-        - name
-        - abbreviation
-        - created
-        - modified
-        - enabled
-
-    Service:
-      type: object
-      properties:
-        id:
-          type: integer
-        category_id:
-          type: integer
-        name:
+        alt:
           type: string
-        time:
-          type: integer
-        price:
+        img:
           type: string
-        created:
+        title:
           type: string
-          format: date-time
-        modified:
+        day:
           type: string
-          format: date-time
-        enabled:
-          type: boolean
-        services_category:
-          $ref: '#/components/schemas/ServicesCategory'
-      required:
-        - id
-        - category_id
-        - name
-        - time
-        - price
-        - created
-        - modified
-        - enabled
-        - services_category
