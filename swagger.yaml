@@ -1,71 +1,167 @@
 openapi: 3.0.0
 info:
+  title: Car Workshop Service Categories API
   version: 1.0.0
-  title: xkcd
-  description: 'A webcomic of romance, sarcasm, math, and language.'
+  description: API for retrieving service categories and services in a car workshop software
 servers:
-  - url: https://familygeeks.com/
-    description: Official xkcd JSON interface
+  - url: https://vulcano.cloud
 paths:
-  /servicesCategories/all:
+  /service_categories:
     get:
-      tags:
-        - ser
-      description: Returns comic based on ID
-      summary: Find latest comic
-      operationId: getComic
+      summary: Get all service categories
       responses:
         '200':
-          description: Successfully returned a comic
+          description: A list of service categories
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Comic'
-  /{id}/info.0.json:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    description: Indicates if the request was successful
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ServiceCategory'
+                example:
+                  status: true
+                  data:
+                    - id: 7
+                      code: "TEST2"
+                      name: "TEST"
+                      abbreviation: "TEST"
+                      created: "2023-04-13T01:05:31+00:00"
+                      modified: "2023-04-13T01:05:31+00:00"
+                      enabled: true
+                    - id: 6
+                      code: "ABC-004"
+                      name: "FAROL"
+                      abbreviation: "FRL"
+                      created: "2023-01-10T16:36:27+00:00"
+                      modified: "2023-01-10T16:36:27+00:00"
+                      enabled: true
+                    - id: 3
+                      code: "LLL-004"
+                      name: "LLANTAS"
+                      abbreviation: "LTS"
+                      created: "2023-01-09T19:02:53+00:00"
+                      modified: "2023-01-09T19:02:53+00:00"
+                      enabled: true
+                    - id: 1
+                      code: "MONTAJE"
+                      name: "MONTAJE"
+                      abbreviation: "ABC"
+                      created: "2022-09-16T12:45:29+00:00"
+                      modified: "2023-01-09T18:38:14+00:00"
+                      enabled: true
+        '500':
+          description: Internal server error
+  /services/getByCategory/{category_id}:
     get:
-      tags:
-        - comic
-      description: Returns comic based on ID
-      summary: Find comic by ID
-      operationId: getComicById
+      summary: Get services by category
       parameters:
-        - name: id
-          in: path
+        - in: path
+          name: category_id
           required: true
+          description: The ID of the service category
           schema:
             type: integer
       responses:
         '200':
-          description: Successfully returned a comic
+          description: A list of services matching the category
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Comic'
-
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    description: Indicates if the request was successful
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Service'
+                example:
+                  status: true
+                  data:
+                    - id: 13
+                      category_id: 7
+                      code: "IT"
+                      name: "Inside test"
+                      time: 123
+                      price: "123.00"
+                      created: "2023-06-30T16:39:31+00:00"
+                      modified: "2023-06-30T16:39:31+00:00"
+                      enabled: true
+                    - id: 26
+                      category_id: 7
+                      code: "IT"
+                      name: "Inside test"
+                      time: 123
+                      price: "123.00"
+                      created: "2023-06-30T16:39:31+00:00"
+                      modified: "2023-06-30T16:39:31+00:00"
+                      enabled: true
+        '500':
+          description: Internal server error
 components:
   schemas:
-    Comic:
+    ServiceCategory:
       type: object
       properties:
-        month:
-          type: string
-        num:
+        id:
           type: integer
-        link:
+          description: The unique identifier of the service category
+        code:
           type: string
-        year:
+          description: The code of the service category
+        name:
           type: string
-        news:
+          description: The name of the service category
+        abbreviation:
           type: string
-        safe_title:
+          description: The abbreviation of the service category
+        created:
           type: string
-        transcript:
+          format: date-time
+          description: The date and time when the service category was created
+        modified:
           type: string
-        alt:
+          format: date-time
+          description: The date and time when the service category was last modified
+        enabled:
+          type: boolean
+          description: Indicates if the service category is enabled
+    Service:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the service
+        category_id:
+          type: integer
+          description: The ID of the service category
+        code:
           type: string
-        img:
+          description: The code of the service
+        name:
           type: string
-        title:
+          description: The name of the service
+        time:
+          type: integer
+          description: The time required for the service in minutes
+        price:
           type: string
-        day:
+          description: The price of the service
+        created:
           type: string
+          format: date-time
+          description: The date and time when the service was created
+        modified:
+          type: string
+          format: date-time
+          description: The date and time when the service was last modified
+        enabled:
+          type: boolean
+          description: Indicates if the service is enabled
