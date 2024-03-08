@@ -4,11 +4,15 @@ info:
   version: 1.0.0
   description: API for retrieving service categories and services in a car workshop software
 servers:
-  - url: https://want.vulcano.cloud
+  - url: https://vulcano.cloud
+  description: API for retrieving service categories and services in a car workshop software
 paths:
   /servicesCategories/all:
     get:
       summary: Get all service categories
+      tags:
+        - Service Categories
+      operationId: getAllServiceCategories
       responses:
         '200':
           description: A list of service categories
@@ -60,6 +64,9 @@ paths:
   /services/getByCategory/{category_id}:
     get:
       summary: Get services by category
+      tags:
+        - Services
+      operationId: getServicesByCategory
       parameters:
         - in: path
           name: category_id
