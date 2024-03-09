@@ -117,6 +117,86 @@ paths:
                       enabled: true
         '500':
           description: Internal server error
+  /services/all:
+    get:
+      summary: Get all services
+      tags:
+        - Services
+      operationId: getAllServices
+      responses:
+        '200':
+          description: A list of all services
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    description: Indicates if the request was successful
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ServiceWithCategory'
+                  errors:
+                    type: object
+                    description: Error information if any
+                example:
+                  status: true
+                  data:
+                    - id: 1
+                      category_id: 1
+                      code: "101"
+                      name: "CAMBIAR EMPAQUETADURA CULATA"
+                      time: 41
+                      price: "0.00"
+                      created: "2024-01-13T12:07:00+00:00"
+                      modified: "2024-01-13T12:07:00+00:00"
+                      enabled: true
+                      services_category:
+                        id: 1
+                        code: "100"
+                        name: "MOTOR"
+                        abbreviation: "MOT"
+                        created: "2024-01-13T11:47:00+00:00"
+                        modified: "2024-01-13T11:47:00+00:00"
+                        enabled: true
+                    - id: 3
+                      category_id: 1
+                      code: "103"
+                      name: "CAMBIAR BLOCK"
+                      time: 0
+                      price: "0.00"
+                      created: "2024-01-13T12:07:00+00:00"
+                      modified: "2024-01-13T12:07:00+00:00"
+                      enabled: true
+                      services_category:
+                        id: 1
+                        code: "100"
+                        name: "MOTOR"
+                        abbreviation: "MOT"
+                        created: "2024-01-13T11:47:00+00:00"
+                        modified: "2024-01-13T11:47:00+00:00"
+                        enabled: true
+                    - id: 887
+                      category_id: 20
+                      code: "2030"
+                      name: "PROGRAMACION KIT DE IDENTIDAD"
+                      time: 0
+                      price: "0.00"
+                      created: "2024-01-13T12:07:00+00:00"
+                      modified: "2024-01-13T12:07:00+00:00"
+                      enabled: true
+                      services_category:
+                        id: 20
+                        code: "2000"
+                        name: "AUXILIOS, PDI Y EXTRAS"
+                        abbreviation: "APE"
+                        created: "2024-01-13T11:47:00+00:00"
+                        modified: "2024-01-13T11:47:00+00:00"
+                        enabled: true
+        '500':
+          description: Internal server error
 components:
   schemas:
     ServiceCategory:
@@ -177,3 +257,37 @@ components:
         enabled:
           type: boolean
           description: Indicates if the service is enabled
+    ServiceWithCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the service
+        category_id:
+          type: integer
+          description: The ID of the service category
+        code:
+          type: string
+          description: The code of the service
+        name:
+          type: string
+          description: The name of the service
+        time:
+          type: integer
+          description: The time required for the service in minutes
+        price:
+          type: string
+          description: The price of the service
+        created:
+          type: string
+          format: date-time
+          description: The date and time when the service was created
+        modified:
+          type: string
+          format: date-time
+          description: The date and time when the service was last modified
+        enabled:
+          type: boolean
+          description: Indicates if the service is enabled
+        services_category:
+          $ref: '#/components/schemas/ServiceCategory'
