@@ -4,8 +4,7 @@ info:
   version: 1.0.0
   description: API for retrieving service categories and services in a car workshop software
 servers:
-  - description: API for retrieving service categories and services in a car workshop software
-    url: https://want.vulcano.cloud
+  - url: https://vulcano.cloud
 paths:
   /servicesCategories/all:
     get:
@@ -28,6 +27,9 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ServiceCategory'
+                  errors:
+                    type: object
+                    description: Error information if any
                 example:
                   status: true
                   data:
@@ -89,6 +91,9 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Service'
+                  errors:
+                    type: object
+                    description: Error information if any
                 example:
                   status: true
                   data:
